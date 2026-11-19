@@ -1,5 +1,7 @@
 # unbite
 
+**English** · [Português (Brasil)](README.pt-BR.md)
+
 **A small webcam watcher that warns you, in your own language, when your hand goes to your mouth.**
 
 Nail biting is mostly automatic: it happens while you read code, wait for a build, or watch an AI write its answer. By the time you notice, the nail is gone. `unbite` notices for you. It runs quietly in the background, and the moment a fingertip reaches your mouth it beeps and shows a red banner saying *"Hands away from your mouth"*, in the language of your computer.
@@ -25,13 +27,13 @@ The distance is measured in mouth widths, so it works the same whether you sit c
 Requires Python 3.10 or newer and a webcam.
 
 ```bash
-pip install git+https://github.com/<your-user>/unbite
+pip install git+https://github.com/icarocarvalhomessias/unbite
 ```
 
 Or from a clone:
 
 ```bash
-git clone https://github.com/<your-user>/unbite
+git clone https://github.com/icarocarvalhomessias/unbite
 cd unbite
 pip install .
 ```
