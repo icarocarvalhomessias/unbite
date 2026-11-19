@@ -1,11 +1,11 @@
 # unbite
 
-**A small webcam watcher that tells you, out loud and in your own language, when your hand goes to your mouth.**
+**A small webcam watcher that warns you, in your own language, when your hand goes to your mouth.**
 
-Nail biting is mostly automatic: it happens while you read code, wait for a build, or watch an AI write its answer. By the time you notice, the nail is gone. `unbite` notices for you. It runs quietly in the background, and the moment a fingertip reaches your mouth it shows a red banner, beeps and says something like *"Hand on your mouth. Careful!"*, in the language of your computer.
+Nail biting is mostly automatic: it happens while you read code, wait for a build, or watch an AI write its answer. By the time you notice, the nail is gone. `unbite` notices for you. It runs quietly in the background, and the moment a fingertip reaches your mouth it beeps and shows a red banner saying *"Hands away from your mouth"*, in the language of your computer.
 
 - **Private by design.** Everything runs on your machine with [MediaPipe](https://ai.google.dev/edge/mediapipe) models. No image is saved, uploaded or sent anywhere.
-- **Speaks your language.** It picks up the system language and uses the voices already installed on Windows, macOS or Linux. Alert texts ship in 22 languages.
+- **Speaks your language.** It picks up the system language; alert texts ship in 22 languages. With `--voice`, it also says the alert aloud with the voices already installed on Windows, macOS or Linux.
 - **Knows a phone from a nail.** A phone at your ear, a cup, a fork or a toothbrush in your hand does not trigger it.
 - **Light.** Runs on the CPU at 15 to 25 frames per second on an ordinary laptop webcam.
 
@@ -55,7 +55,8 @@ Press `q` in the preview window, or `Ctrl+C` in the terminal, to stop.
 | `--cooldown 4` | Minimum seconds between alerts. |
 | `--camera N` / `--list-cameras` | Choose the camera. Default: the last one found, usually the external one. |
 | `--lang pt` / `--list-languages` | Force an alert language instead of the system's. |
-| `--no-voice`, `--no-sound`, `--no-banner` | Turn each kind of alert off. |
+| `--voice` | Also speak the alert aloud ("Hand on your mouth. Careful!"). Off by default. |
+| `--no-sound`, `--no-banner` | Turn the beep or the banner off. |
 | `--no-objects` | Alert even with a phone, cup or food in your hand. |
 | `--log alerts.csv` | Append the time of each alert to a CSV file, to see your patterns. Times only. |
 
@@ -67,7 +68,7 @@ Run `unbite --preview` and bring your fingers to your mouth. The line between yo
 
 Arabic, Chinese (Simplified and Traditional), Dutch, English, French, German, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian and Vietnamese.
 
-The spoken voice comes from your operating system: SAPI voices on Windows, `say` on macOS, and `spd-say` or `espeak-ng` on Linux. If no voice for your language is installed, the default voice is used. You can add one in your system's speech settings.
+The optional spoken alert (`--voice`) uses your operating system's voices: SAPI voices on Windows, `say` on macOS, and `spd-say` or `espeak-ng` on Linux. If no voice for your language is installed, the default voice is used. You can add one in your system's speech settings.
 
 Each language is one small file in [`src/unbite/locales/`](src/unbite/locales). Corrections from native speakers and new languages are very welcome: copy `en.json`, translate the two sentences, and open a pull request.
 

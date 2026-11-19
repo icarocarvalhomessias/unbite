@@ -13,7 +13,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from unbite.banner import Banner
+from unbite.banner import Banner, beep
 from unbite.detection import HandMouthDetector, HeldObject, ObjectInHandDetector, to_mp_image
 from unbite.geometry import Reach
 from unbite.i18n import Messages
@@ -90,7 +90,7 @@ class Monitor:
         if self.show_banner:
             self._banner.show()
         elif self.sound:
-            self._root.bell()
+            beep(self._root)
         self.speaker.say(self.messages.speech)
         if self.log_path:
             _append_log(self.log_path, reach.distance)

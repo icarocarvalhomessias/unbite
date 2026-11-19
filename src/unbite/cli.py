@@ -70,7 +70,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="alert language, e.g. en, pt, es, zh-TW (default: the system's)",
     )
     out.add_argument("--list-languages", action="store_true", help="list languages and exit")
-    out.add_argument("--no-voice", action="store_true", help="do not speak the alert")
+    out.add_argument(
+        "--voice",
+        action="store_true",
+        help="also speak the alert aloud with the system's voice (off by default)",
+    )
     out.add_argument("--no-sound", action="store_true", help="do not beep")
     out.add_argument("--no-banner", action="store_true", help="do not show the red banner")
     out.add_argument(
@@ -119,7 +123,7 @@ def main(argv: list[str] | None = None) -> int:
         objects=None if args.no_objects else ObjectInHandDetector(),
         tracker=HabitTracker(Settings(args.threshold, args.hold, args.cooldown)),
         messages=messages,
-        speaker=speech.Silent() if args.no_voice else speech.create(language),
+        speaker=speech.create(language) if args.voice else speech.Silent(),
         sound=not args.no_sound,
         show_banner=not args.no_banner,
         preview=args.preview,

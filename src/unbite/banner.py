@@ -3,10 +3,21 @@
 from __future__ import annotations
 
 import sys
+import threading
 import tkinter as tk
 
 _FONT = {"win32": "Segoe UI", "darwin": "Helvetica Neue"}.get(sys.platform, "DejaVu Sans")
 _RED = "#c62828"
+
+
+def beep(root: tk.Misc) -> None:
+    """A short, clear tone. Windows plays it without blocking; elsewhere, the system bell."""
+    if sys.platform == "win32":
+        import winsound
+
+        threading.Thread(target=winsound.Beep, args=(1200, 350), daemon=True).start()
+    else:
+        root.bell()
 
 
 class Banner:
@@ -18,12 +29,13 @@ class Banner:
 
     def show(self, seconds: float = 1.5) -> None:
         if self._sound:
-            self._root.bell()
+            beep(self._root)
         if self._window is not None:
             return
         window = tk.Toplevel(self._root)
         window.overrideredirect(True)
         window.attributes("-topmost", True)
+        window.attributes("-alpha", 0.92)
         window.configure(bg=_RED)
         label = tk.Label(
             window,
